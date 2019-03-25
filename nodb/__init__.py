@@ -101,6 +101,20 @@ class NoDB(object):
 
         return resp
 
+    def update(self, index, updates={}):
+        """ 
+        updates a document on s3.  loads, then preforms updates then saves. 
+        """
+        doc =  self.load(index)
+        
+        #doc is none so doesn't exist... 
+        if doc == None:
+            updates['_id'] = index
+            return self.save(updates)
+ 
+        doc.update(updates)
+        return self.save(udpates)
+        
     def load(self, index, metainfo=False, default=None):
         """
         Load an object from the backend datastore.
