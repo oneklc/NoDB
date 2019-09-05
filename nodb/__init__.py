@@ -46,7 +46,7 @@ class NoDB(object):
         if session:
             self.s3 = session.resource('s3', config=botocore.client.Config(signature_version=self.signature_version))
         if endpoint_url:
-            self.s3 = session.resource('s3', config=botocore.client.Config(signature_version=self.signature_version), endpoint_url=endpoint_url)
+            self.s3 = boto3.resource('s3', config=botocore.client.Config(signature_version=self.signature_version), endpoint_url=endpoint_url)
 
 
     ##
